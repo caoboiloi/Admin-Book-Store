@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+  <!-- Brand -->
+  <ng-container *ngIf="isAccountLogin != undefined">
+    <a class="navbar-brand" href="" *ngIf="isAccountLogin[0].role == 3">BẢNG ĐIỀU KHIỂN</a>
+    <a class="navbar-brand" href="admin/provider" *ngIf="isAccountLogin[0].role != 3">BẢNG ĐIỀU KHIỂN</a>
+  </ng-container>
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav" *ngIf="isAccountLogin != undefined">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/staff']" *ngIf="isAccountLogin[0].role == 3">Nhân viên</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/provider']">Nhà phân phối</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/publisher']">Nhà xuất bản</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/shipper']">Nhà vận chuyển</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/user']">Khách hàng</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin/book']">Sản phẩm</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="isAccountLogin != undefined" class="name-admin">{{isAccountLogin[0].name | uppercase}}</div>
+  <button class="btn-secondary" *ngIf="AdminService.isUserLoggedIn()" [routerLink]="['/logout']">Đăng xuất</button>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+<!-- <div id="chartContainer" style="height: 370px; width: 100%;"></div> -->

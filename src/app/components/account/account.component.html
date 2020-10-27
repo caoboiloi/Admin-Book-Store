@@ -1,0 +1,32 @@
+<h3 class="title-staff">TÀI KHOẢN</h3>
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" [style.margin-top.px]='30'>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr class="header-table">
+          <th>HỌ TÊN</th>
+          <th>TÀI KHOẢN</th>
+          <th>MẬT KHẨU</th>
+          <th>QUYỀN TRUY CẬP</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accounts">
+          <ng-container *ngIf="account.id != isIdLogin">
+            <td>{{account.name}}</td>
+            <td>{{account.username}}</td>
+            <td>{{account.pass | formatDecodeBase64}}</td>
+            <td>{{account.role}}</td>
+            <td><a href="admin/staff" (click)='removeAc(account.id)'>Xóa</a></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div>_____________________________________________________________________________________________________________________________________________</div>
+<br>
+<br>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
