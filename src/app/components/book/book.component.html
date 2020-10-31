@@ -1,52 +1,49 @@
-<h3 class="title-provider">SẢN PHẨM</h3>
-<button type="button" class="btn btn-success" (click)='chartHighPerformance(items)'>Đồ thị biến động giá các loại sách</button>
-<div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
-<div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" [style.margin-top.px]='30'>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <!-- <th>HÌNH ẢNH</th> -->
-          <th>ID</th>
-          <th>TÊN</th>
-          <th>SKU</th>
-          <th>TÁC GIẢ</th>
-          <th>GIÁ</th>
-          <th>SỐ TRANG</th>
-          <th>BÌA</th>
-          <th>CHIỀU RỘNG</th>
-          <th>CHIỀU CAO</th>
-          <th>ID NHÀ CUNG CẤP</th>
-          <th>ID NHÀ XUẤT BẢN</th>
-          <th>ACTION</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let book of books | paginate: {id: 'book', itemsPerPage: 2, currentPage: page }">
-          <!-- <td><img src="{{book.img}}" width="140%"></td> -->
-          <td>{{book.id}}</td>
-          <td>{{book.name}}</td>
-          <td>{{book.sku}}</td>
-          <td>{{book.author}}</td>
-          <td>{{book.price}}</td>
-          <td>{{book.page}}</td>
-          <td>{{book.cover}}</td>
-          <td>{{book.width}}</td>
-          <td>{{book.height}}</td>
-          <td>{{book.provider}}</td>
-          <td>{{book.publisher}}</td>
-          <td><a href="admin/book" (click)='removeBook(book.id)'>Xóa</a></td>
-        </tr>
-        <tr>
-          <td colspan="12">
-            <!-- phân trang -->
-            <pagination-controls id="book" class="pagination" (pageChange)="handlePageChange($event)" previousLabel="" nextLabel="">
-            </pagination-controls>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div id="content" class="p-4 p-md-5 pt-5">
+  <h3 class="title-provider">SẢN PHẨM</h3>
+  <button type="button" class="btn btn-success" (click)='chartHighPerformance(items)'>Đồ thị biến động giá các loại sách</button>
+  <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" [style.margin-top.px]='30'>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th width="400px">HÌNH ẢNH</th>
+            <th width="200px">TÊN</th>
+            <th>SKU</th>
+            <th>TÁC GIẢ</th>
+            <th>GIÁ</th>
+            <th>SỐ TRANG</th>
+            <th>BÌA</th>
+            <th width="200px">KÍCH THƯỚC</th>
+            <th>ID NHÀ CUNG CẤP</th>
+            <th>ID NHÀ XUẤT BẢN</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books | paginate: {id: 'book', itemsPerPage: 5, currentPage: page }">
+            <td><img [src]="book.img | formatImg" width="100%" style="margin-right: -70px"></td>
+            <td>{{book.name}}</td>
+            <td>{{book.sku}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.price | currency : '' : '' :'1.0-3'}} VNĐ</td>
+            <td>{{book.page}}</td>
+            <td>{{book.cover}}</td>
+            <td>{{book.height}} - {{book.width}} cm</td>
+            <td>{{book.provider}}</td>
+            <td>{{book.publisher}}</td>
+            <td><a href="admin/book" (click)='removeBook(book.id)'>Xóa</a></td>
+          </tr>
+          <tr>
+            <td colspan="12">
+              <!-- phân trang -->
+              <pagination-controls id="book" class="pagination" (pageChange)="handlePageChange($event)" previousLabel="" nextLabel="">
+              </pagination-controls>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+  <div>_____________________________________________________________________________________________________________________________________________</div>
 </div>
-<div>_____________________________________________________________________________________________________________________________________________</div>
-

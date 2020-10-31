@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Admin } from './../models/Admin.class';
@@ -9,9 +9,10 @@ import { Admin } from './../models/Admin.class';
 export class AdminService {
 
 	public API_user: string = 'http://localhost:8080/api/admins/username/';
-	public API : string = 'http://localhost:8080/api/admins';
-	public API_deletebyid : string = 'http://localhost:8080/api/admins/';
-	public API_update : string = 'http://localhost:8080/api/admins/';
+	public API_id : string = 'http://localhost:8080/api/admins/id/';
+	public API: string = 'http://localhost:8080/api/admins';
+	public API_deletebyid: string = 'http://localhost:8080/api/admins/';
+	public API_update: string = 'http://localhost:8080/api/admins/';
 	constructor(public http: HttpClient) { }
 
 	getByUsername(username): Observable<Admin> {
@@ -19,11 +20,15 @@ export class AdminService {
 		return this.http.get<Admin>(this.API_user + username);
 	}
 
+	getById(id: string): Observable<Admin> {
+		return this.http.get<Admin>(this.API_id + id);
+	}
+
 	getAllAccount(): Observable<Admin[]> {
 		return this.http.get<Admin[]>(this.API);
 	}
 
-	updateAccess(acccount:Admin,id:string): Observable<Admin> {
+	updateAccess(acccount: Admin, id: string): Observable<Admin> {
 		return this.http.put<Admin>(this.API_update + id, acccount);
 	}
 

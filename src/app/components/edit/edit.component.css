@@ -1,0 +1,142 @@
+button.button-show-img {
+  margin-left: 300px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  outline: 2px solid;
+}
+
+div.edit-profile-all {
+  position: relative;
+  right: -15px;
+}
+.edit-profile-all-change {
+  position: relative;
+  left: 165px;
+}
+
+div.row {
+  padding: 30px;
+  margin-bottom: 40px;
+  box-shadow: 1px 1px 20px 1px grey;
+}
+
+div.row.img div {
+  display: flex;
+  justify-content: center;
+}
+
+.show-img {
+  margin-top: 30px;
+  background: rgb(99, 39, 120);
+  box-shadow: none;
+  border: none
+}
+.show-img:hover {
+  background: #682773;
+}
+.show-img:focus {
+  background: #682773;
+  box-shadow: none
+}
+
+.show-img:active {
+  background: #682773;
+  box-shadow: none
+}
+
+div.row.enter div {
+  display: flex;
+  justify-content: left;
+}
+
+button.profile-button {
+  width: 120px;
+  height: 35px; 
+  position: relative;
+  left: 357px;
+}
+
+div#file {
+  margin-top: 20px;
+  margin-left: 220px;
+}
+
+.title-edit-profile {
+  font-family: Arial, Helvetica, sans-serif;
+  color: grey;
+}
+
+div.container.rounded.bg-white.mt-5.mb-5 {
+  margin-top: 50px;
+  width: 750px;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #BA68C8
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.profile-button {
+  margin-top: 30px;
+  background: rgb(99, 39, 120);
+  box-shadow: none;
+  border: none
+}
+
+.profile-button:hover {
+  background: #682773
+}
+
+.profile-button:focus {
+  background: #682773;
+  box-shadow: none
+}
+
+.profile-button:active {
+  background: #682773;
+  box-shadow: none
+}
+
+.back:hover {
+  color: #682773;
+  cursor: pointer
+}
+
+.labels {
+  font-size: 11px
+}
+
+input:not(#file) {
+  outline: 2px grey solid;
+}
+
+.add-experience:hover {
+  background: #BA68C8;
+  color: #fff;
+  cursor: pointer;
+  border: solid 1px #BA68C8
+}
+
+.alert {
+  text-align: center;
+  margin-top: 0px;
+  top: 0;
+  right: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  padding: 2rem;
+  background: #fff;
+  color: #f65656;
+  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(1.25rem);
+}

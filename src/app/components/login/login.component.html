@@ -26,6 +26,9 @@
             </button>
           </div>
         </form>
+        <div class="alert" [class.visible]="isVisible">
+          {{messageAlert}}
+        </div>
       </div>
     </div>
   </div>

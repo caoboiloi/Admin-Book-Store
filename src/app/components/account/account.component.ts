@@ -1,8 +1,26 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+
 import * as CanvasJS from './../../../assets/canvasjs/canvasjs.min';
-import { AdminService } from './../../services/admin.service';
+
 import { Subscription, forkJoin } from 'rxjs';
+
 import { Admin } from './../../models/Admin.class';
+import { AdminService } from './../../services/admin.service';
+
+import { Book } from './../../models/Book.class';
+import { BookService } from './../../services/book.service';
+
+import { Publisher } from './../../models/Publisher.class';
+import { PublisherService } from './../../services/publisher.service';
+
+import { Provider } from './../../models/Provider.class';
+import { ProviderService } from './../../services/provider.service';
+
+import { User } from './../../models/User.class';
+import { UserService } from './../../services/user.service';
+
+import { SendDataService } from './../../services/send-data.service';
+
 import { FormatDecodeBase64Pipe } from './../../pipes/format-decode-base64.pipe';
 
 @Component({
@@ -12,17 +30,41 @@ import { FormatDecodeBase64Pipe } from './../../pipes/format-decode-base64.pipe'
 })
 export class AccountComponent implements OnInit, OnDestroy {
 
+
 	public isIdLogin: string = sessionStorage.getItem('id');
+	public status:boolean = false;
 	public accounts: Admin[] = [];
+	public books: Book[] = [];
+	public users: User[] = [];
+	public publishers: Publisher[] = [];
+	public providers: Provider[] = [];
 	public passDecode: string = '';
+
 	public Subscription: Subscription;
+
 	public items = [];
 	public checkShowChart = false;
-	constructor(public AdminService: AdminService) { }
+
+	constructor(
+		public AdminService: AdminService,
+		public BookService: BookService,
+		public PublisherService: PublisherService,
+		public ProviderService: ProviderService,
+		public UserService:UserService,
+		public SendDataService:SendDataService
+		) {
+		}
 
 	ngOnInit(): void {
+		this.SendDataService.On("account").subscribe(data => {
+			this.status = data;
+		});
 		this.loadAllAccount();
 		this.showChart();
+		this.loadAllBook();
+		this.loadAllPublisher();
+		this.loadAllProvider();
+		this.loadAllUser();
 	}
 
 	showChart() {
@@ -48,6 +90,38 @@ export class AccountComponent implements OnInit, OnDestroy {
 			this.AdminService.handleError(error);
 		});
 
+	}
+
+	loadAllUser() {
+		this.Subscription = this.UserService.getAlluser().subscribe(data => {
+			this.users = data;
+		},error => {
+			this.UserService.handleError(error);
+		});
+	}
+
+	loadAllProvider() {
+		this.Subscription = this.ProviderService.getAllProvider().subscribe(data => {
+			this.providers = data;
+		},error => {
+			this.ProviderService.handleError(error);
+		});
+	}
+
+	loadAllPublisher() {
+		this.Subscription = this.PublisherService.getAllPublisher().subscribe(data => {
+			this.publishers = data;
+		},error => {
+			this.PublisherService.handleError(error);
+		});
+	}
+
+	loadAllBook() {
+		this.Subscription = this.BookService.getAllBook().subscribe(data => {
+			this.books = data;
+		},error => {
+			this.BookService.handleError(error);
+		});
 	}
 
 	loadAllAccount() {

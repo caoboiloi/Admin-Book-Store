@@ -9,6 +9,7 @@ import { PublisherComponent } from './components/publisher/publisher.component';
 import { UserComponent } from './components/user/user.component';
 import { BookComponent } from './components/book/book.component';
 import { ShipperComponent } from './components/shipper/shipper.component';
+import { EditComponent } from './components/edit/edit.component';
 
 import { AuthGaurdService } from './services/auth-gaurd.service';
 
@@ -27,6 +28,11 @@ export const appRouter: Routes = [
 		component: AdminComponent,
 		canActivate: [AuthGaurdService],
 		children: [
+			{
+				path: 'edit',
+				component: EditComponent,
+				canActivate: [AuthGaurdService],
+			},
 			{
 				path: 'staff',
 				component: AccountComponent,
@@ -54,7 +60,7 @@ export const appRouter: Routes = [
 			},
 			{
 				path: 'shipper',
-				component:ShipperComponent,
+				component: ShipperComponent,
 				canActivate: [AuthGaurdService]
 			}
 		]
@@ -66,7 +72,8 @@ export const appRouter: Routes = [
 	},
 	{
 		path: '**',
-		component: ErrorComponent
+		component: ErrorComponent,
+		canActivate: [AuthGaurdService],
 	}
 
 ]

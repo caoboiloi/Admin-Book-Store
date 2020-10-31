@@ -24,6 +24,8 @@ import { PublisherComponent } from './components/publisher/publisher.component';
 import { UserComponent } from './components/user/user.component';
 import { BookComponent } from './components/book/book.component';
 import { ShipperComponent } from './components/shipper/shipper.component';
+import { FormatImgPipe } from './pipes/format-img.pipe';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ShipperComponent } from './components/shipper/shipper.component';
     PublisherComponent,
     UserComponent,
     BookComponent,
-    ShipperComponent
+    ShipperComponent,
+    FormatImgPipe,
+    EditComponent
   ],
   imports: [
     BrowserModule,

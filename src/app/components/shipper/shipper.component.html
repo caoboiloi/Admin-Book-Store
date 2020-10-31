@@ -1,47 +1,49 @@
-<h3 class="title-provider">NHÀ VẬN CHUYỂN</h3>
-<div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" [style.margin-top.px]='30'>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr class="header-table">
-          <th>ID</th>
-          <th>TÊN NHÀ VẬN CHUYỂN</th>
-          <th>ACTION</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let shipper of shippers | paginate: { itemsPerPage: 4, currentPage: page }">
-          <td>{{shipper.id}}</td>
-          <td>{{shipper.name}}</td>
-          <td><a href="admin/shipper" (click)='removeProvider(shipper.id)'>Xóa</a></td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <!-- phân trang -->
-            <pagination-controls class="pagination" (pageChange)="handlePageChange($event)" previousLabel="" nextLabel="">
-            </pagination-controls>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div id="content" class="p-4 p-md-5 pt-5">
+  <h3 class="title-provider">NHÀ VẬN CHUYỂN</h3>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" [style.margin-top.px]='30'>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="header-table">
+            <th>ID</th>
+            <th>TÊN NHÀ VẬN CHUYỂN</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let shipper of shippers | paginate: { itemsPerPage: 4, currentPage: page }">
+            <td>{{shipper.id}}</td>
+            <td>{{shipper.name}}</td>
+            <td><a href="admin/shipper" (click)='removeProvider(shipper.id)'>Xóa</a></td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <!-- phân trang -->
+              <pagination-controls class="pagination" (pageChange)="handlePageChange($event)" previousLabel="" nextLabel="">
+              </pagination-controls>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
-<div>_____________________________________________________________________________________________________________________________________________</div>
-<div class="row">
-  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-    <button (click)='showChartCicle(items)' class="buttonChart" class="btn btn-success">
-      Đồ thị tỉ trọng sách của các nhà vận chuyển
-    </button>
-    <br>
-    <br>
-    <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
-  </div>
-  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-    <button (click)='showChartHightPerformance(items)' class="buttonChart" class="btn btn-success">
-      Đồ thị số lượng sách của các nhà vận chuyển
-    </button>
-    <br>
-    <br>
-    <div id="chartContainer-2" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+  <div>_____________________________________________________________________________________________________________________________________________</div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <button (click)='showChartCicle(items)' class="buttonChart" class="btn btn-success">
+        Đồ thị tỉ trọng sách của các nhà vận chuyển
+      </button>
+      <br>
+      <br>
+      <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <button (click)='showChartHightPerformance(items)' class="buttonChart" class="btn btn-success">
+        Đồ thị số lượng sách của các nhà vận chuyển
+      </button>
+      <br>
+      <br>
+      <div id="chartContainer-2" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+    </div>
   </div>
 </div>

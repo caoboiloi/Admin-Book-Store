@@ -46,7 +46,6 @@ export class ShipperComponent implements OnInit {
 		this.Subscription = this.ShipperService.getAllShipper().subscribe(data => {
 			for (var i = data.length - 1; i >= 0; i--) {
 				let nameShipper = data[i]["name"];
-				console.log(nameShipper);
 				this.Subscription = this.BuyService.getBuyByIdshipper(data[i]["id"]).subscribe(dataBook => {
 					if (dataBook.length && dataBook != undefined) {
 						this.items.push({ y: dataBook.length, name: nameShipper });
@@ -55,7 +54,6 @@ export class ShipperComponent implements OnInit {
 					this.BookService.handleError(error);
 				});
 			}
-			console.log(this.items);
 		}, error => {
 			this.ShipperService.handleError(error);
 		});

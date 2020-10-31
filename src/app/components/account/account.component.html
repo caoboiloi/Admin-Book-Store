@@ -1,32 +1,71 @@
-<h3 class="title-staff">TÀI KHOẢN</h3>
-<div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" [style.margin-top.px]='30'>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr class="header-table">
-          <th>HỌ TÊN</th>
-          <th>TÀI KHOẢN</th>
-          <th>MẬT KHẨU</th>
-          <th>QUYỀN TRUY CẬP</th>
-          <th>ACTION</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let account of accounts">
-          <ng-container *ngIf="account.id != isIdLogin">
-            <td>{{account.name}}</td>
-            <td>{{account.username}}</td>
-            <td>{{account.pass | formatDecodeBase64}}</td>
-            <td>{{account.role}}</td>
-            <td><a href="admin/staff" (click)='removeAc(account.id)'>Xóa</a></td>
-          </ng-container>
-        </tr>
-      </tbody>
-    </table>
+<div id="content" class="p-4 p-md-5 pt-5" [ngClass]="status ? 'content-account' : ''">
+  <h3 class="title-staff"><b>BẢNG ĐIỀU KHIỂN</b></h3>
+  <div class="row title-sum">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" class="sum-title" id="one">
+      <b>KHÁCH HÀNG</b> <br>
+      <div class="total">
+        {{users.length}}
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" class="sum-title" id="two">
+      <b>SÁCH</b> <br>
+      <div class="total">
+        {{books.length}}
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" class="sum-title" id="three">
+      <b>NHÀ CUNG CẤP</b> <br>
+      <div class="total">
+        {{providers.length}}
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" class="sum-title" id="four">
+      <b>NHÀ XUẤT BẢN</b> <br>
+      <div class="total">
+        {{publishers.length}}
+      </div>
+    </div>
   </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="header-table">
+            <th>ẢNH ĐẠI DIỆN</th>
+            <th>HỌ TÊN</th>
+            <th>TÀI KHOẢN</th>
+            <!-- <th>MẬT KHẨU</th> -->
+            <th>QUYỀN TRUY CẬP</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts">
+            <ng-container *ngIf="account.id != isIdLogin">
+              <td width="200px" height="200px">
+                <img [src]="account.img | formatImg" width="180px" height="180px" style="border-radius: 50%">
+              </td>
+              <td>{{account.name}}</td>
+              <td>{{account.username}}</td>
+              <!-- <td>{{account.pass | formatDecodeBase64}}</td> -->
+              <td>{{account.role}}</td>
+              <td>
+                <a [routerLink]="['/admin/edit']" [queryParams] = "{type:'staff',id: account.id}">Sửa</a> | 
+                <a href="admin/staff" (click)='removeAc(account.id)'>Xóa</a>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 30px; padding-bottom: 400px">
+    <div class="col-xs-12  col-sm-12  col-md-12  col-lg-12 ">
+      <div id="chartContainer"></div>
+    </div>
+  </div>
+  <br>
+  <br>
 </div>
-<div>_____________________________________________________________________________________________________________________________________________</div>
-<br>
-<br>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-

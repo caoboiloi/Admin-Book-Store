@@ -1,14 +1,11 @@
-<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-  <!-- Brand -->
+<!-- <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
   <ng-container *ngIf="isAccountLogin != undefined">
     <a class="navbar-brand" href="" *ngIf="isAccountLogin[0].role == 3">BẢNG ĐIỀU KHIỂN</a>
     <a class="navbar-brand" href="admin/provider" *ngIf="isAccountLogin[0].role != 3">BẢNG ĐIỀU KHIỂN</a>
   </ng-container>
-  <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <!-- Navbar links -->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav" *ngIf="isAccountLogin != undefined">
       <li class="nav-item">
@@ -37,4 +34,49 @@
 <div class="container">
   <router-outlet></router-outlet>
 </div>
-<!-- <div id="chartContainer" style="height: 370px; width: 100%;"></div> -->
+ -->
+<ng-container *ngIf="isAccountLogin != undefined">
+  <div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar" [ngClass]="status ? 'active' : ''">
+      <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary" (click)="handleStatus()">
+        </button>
+      </div>
+      <div class="img bg-wrap text-center py-4">
+        <div class="user-logo">
+          <div class="img">
+            <img [src]="isAccountLogin.img | formatImg" width="100%" class="avatar">
+          </div>
+          <h3>{{isAccountLogin.name | uppercase}}</h3>
+        </div>
+      </div>
+      <ul class="list-unstyled components mb-5">
+        <li>
+          <a [routerLink]="['/admin/staff']"><span class="fa fa-home mr-3"></span> Nhân Viên</a>
+        </li>
+        <li>
+          <a [routerLink]="['/admin/book']"><span class="fa fa-download mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Sách</a>
+        </li>
+        <li>
+          <a [routerLink]="['/admin/publisher']"><span class="fa fa-gift mr-3"></span> Nhà Xuất Bản</a>
+        </li>
+        <li>
+          <a [routerLink]="['/admin/provider']"><span class="fa fa-trophy mr-3"></span> Nhà Cung Cấp</a>
+        </li>
+        <li>
+          <a [routerLink]="['/admin/shipper']"><span class="fa fa-cog mr-3"></span> Nhà Vận Vhuyển</a>
+        </li>
+        <li>
+          <a href="#"><span class="fa fa-support mr-3"></span> Đổi Mật Khẩu</a>
+        </li>
+        <li>
+          <a *ngIf="AdminService.isUserLoggedIn()" [routerLink]="['/logout']">
+            <span class="fa fa-sign-out mr-3"></span> Sign Out
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- Page Content  -->
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
