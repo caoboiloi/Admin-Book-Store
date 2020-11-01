@@ -15,6 +15,9 @@ import { BookService } from './../../services/book.service';
 import { Publisher } from './../../models/Publisher.class';
 import { PublisherService } from './../../services/publisher.service';
 
+import { Author } from './../../models/Author.class';
+import { AuthorService } from './../../services/author.service';
+
 import { Provider } from './../../models/Provider.class';
 import { ProviderService } from './../../services/provider.service';
 
@@ -34,10 +37,11 @@ export class AccountComponent implements OnInit, OnDestroy {
 
 	faAddressCard = faAddressCard;
 	public isIdLogin: string = sessionStorage.getItem('id');
-	public status:boolean = false;
+	public status: boolean = false;
 	public accounts: Admin[] = [];
 	public books: Book[] = [];
 	public users: User[] = [];
+	public authors: Author[] = [];
 	public publishers: Publisher[] = [];
 	public providers: Provider[] = [];
 	public passDecode: string = '';
@@ -52,10 +56,11 @@ export class AccountComponent implements OnInit, OnDestroy {
 		public BookService: BookService,
 		public PublisherService: PublisherService,
 		public ProviderService: ProviderService,
-		public UserService:UserService,
-		public SendDataService:SendDataService
-		) {
-		}
+		public UserService: UserService,
+		public AuthorService: AuthorService,
+		public SendDataService: SendDataService
+	) {
+	}
 
 	ngOnInit(): void {
 		this.SendDataService.On("account").subscribe(data => {
@@ -67,6 +72,13 @@ export class AccountComponent implements OnInit, OnDestroy {
 		this.loadAllPublisher();
 		this.loadAllProvider();
 		this.loadAllUser();
+		this.loadAllAuthor();
+	}
+
+	loadAllAuthor() {
+		this.Subscription = this.AuthorService.getAllAuthor().subscribe(data => {
+			this.authors = data;
+		});
 	}
 
 	showChart() {
@@ -97,7 +109,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 	loadAllUser() {
 		this.Subscription = this.UserService.getAlluser().subscribe(data => {
 			this.users = data;
-		},error => {
+		}, error => {
 			this.UserService.handleError(error);
 		});
 	}
@@ -105,7 +117,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 	loadAllProvider() {
 		this.Subscription = this.ProviderService.getAllProvider().subscribe(data => {
 			this.providers = data;
-		},error => {
+		}, error => {
 			this.ProviderService.handleError(error);
 		});
 	}
@@ -113,7 +125,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 	loadAllPublisher() {
 		this.Subscription = this.PublisherService.getAllPublisher().subscribe(data => {
 			this.publishers = data;
-		},error => {
+		}, error => {
 			this.PublisherService.handleError(error);
 		});
 	}
@@ -121,7 +133,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 	loadAllBook() {
 		this.Subscription = this.BookService.getAllBook().subscribe(data => {
 			this.books = data;
-		},error => {
+		}, error => {
 			this.BookService.handleError(error);
 		});
 	}

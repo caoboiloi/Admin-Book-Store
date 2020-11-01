@@ -55,18 +55,23 @@ div.total {
 	border-radius: 2%;
 }
 .sum-title#one {
-	background-color: #2c97df
+	background-color: #2c97df;
 }
 .sum-title#two {
-	background-color: #ea43d5
+	background-color: #ea43d5;
 }
 
 .sum-title#three {
-	background-color: #f89b00
+	background-color: #f89b00;
 }
 
 .sum-title#four {
-	background-color: #d53343
+	background-color: #d53343;
+}
+.sum-title#file {
+	background-color: #124957;
+	position: relative;
+	left: 390px;
 }
 
 .sum-title:hover {
