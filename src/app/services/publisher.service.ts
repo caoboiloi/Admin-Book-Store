@@ -11,6 +11,7 @@ export class PublisherService {
 	public API: string = 'http://localhost:8080/api/publishers';
 	public API_id : string = 'http://localhost:8080/api/publishers/id/';
 	public API_deletebyid:string = 'http://localhost:8080/api/publishers/';
+	public API_create:string = 'http://localhost:8080/api/publishers/create';
 	constructor(
 		public http:HttpClient
 	) { }
@@ -26,6 +27,10 @@ export class PublisherService {
 
 	deleteProviderById(id: string): Observable<Publisher> {
 		return this.http.delete<Publisher>(this.API_deletebyid + id);
+	}
+
+	addPublisher(publisher: Publisher): Observable<Publisher> {
+		return this.http.post<Publisher>(this.API_create, publisher);
 	}
 
 	handleError(err){

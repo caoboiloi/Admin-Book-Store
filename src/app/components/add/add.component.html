@@ -56,10 +56,10 @@
   </div>
 </ng-container>
 <ng-container *ngIf="type == 'book'">
-  <div id="content" class="edit-profile-all" style="margin-left: 80px; margin-top: 85px" [ngClass]="status ? 'edit-profile-all-change' : ''">
+  <div id="content" class="add-profile-book" style="margin-left: 80px; margin-top: 85px" [ngClass]="status ? 'add-profile-book-change' : ''">
     <div>
-      <h3 class="title-edit-profile" style="text-align: center;"><b>THÊM {{title | uppercase}}</b></h3>
-      <div class="row img">
+      <h3 class="title-edit-profile book-add" style="text-align: center;"><b>THÊM {{title | uppercase}}</b></h3>
+      <div class="row img book-img">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <img class="avatar" [src]="imagePath" width="300px" height="300px" style="margin-bottom: 30px;">
         </div>
@@ -70,62 +70,63 @@
           <button class="btn btn-primary show-img" type="button" (click)='handleShow(base64textString)'>Hiển thị ảnh</button>
         </div>
       </div>
-      <div class="row">
+      <div class="row book-add">
         <div class="col-md-6">
           <div class="form-group">
             <label>Tên sách</label>
-            <input type="text" class="form-control" placeholder="Your Username *" value="" [(ngModel)]='username' />
+            <input type="text" class="form-control" placeholder="Book name *" value="" [(ngModel)]='bookName' />
           </div>
           <div class="form-group">
             <label>Giá sách</label>
-            <input type="password" class="form-control" placeholder="Your Password *" value="" [(ngModel)]='pass' />
+            <input type="number" class="form-control" placeholder="Price *" value="" [(ngModel)]='bookPrice' />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Nhà xuất bản</label>
-            <input type="text" class="form-control" placeholder="Your Name *" value="" [(ngModel)]='name' />
+            <input type="text" class="form-control" placeholder="Publisher *" value="" [(ngModel)]='bookPublisher' />
           </div>
           <div class="form-group">
             <label>Nhà Cung cấp</label>
-            <input type="text" class="form-control" placeholder="Confirm Password *" value="" [(ngModel)]='confirmPass' />
+            <input type="text" class="form-control" placeholder="provider *" value="" [(ngModel)]='bookProvider' />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Tác giả</label>
-            <input type="number" class="form-control" placeholder="Role *" value="" [(ngModel)]='role' />
+            <input type="text" class="form-control" placeholder="Author *" value="" [(ngModel)]='bookAuthor' />
           </div>
           <div class="form-group">
             <label>Loại bìa</label>
-            <input type="number" class="form-control" placeholder="Role *" value="" [(ngModel)]='role' />
+            <input type="text" class="form-control" placeholder="Cover *" value="" [(ngModel)]='bookCover' />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Chiều cao</label>
-            <input type="number" class="form-control" placeholder="Role *" value="" [(ngModel)]='role' />
+            <input type="number" class="form-control" placeholder="Height *" value="" [(ngModel)]='bookHeight' />
           </div>
           <div class="form-group">
             <label>Chiều rộng</label>
-            <input type="number" class="form-control" placeholder="Role *" value="" [(ngModel)]='role' />
+            <input type="number" class="form-control" placeholder="width *" value="" [(ngModel)]='bookWidth' />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Sku</label>
-            <input type="number" class="form-control" placeholder="Role *" value="" [(ngModel)]='role' />
+            <input type="number" class="form-control" placeholder="Sku *" value="" [(ngModel)]='bookSku' />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label>Số trang</label>
-            <input type="number" class="form-control" placeholder="Role *" value="" [(ngModel)]='role' />
+            <input type="number" class="form-control" placeholder="Page *" value="" [(ngModel)]='bookPage' />
           </div>
         </div>
         <div class="col-md-12">
           <div class="form-group">
-            <textarea type="text" class="form-control" placeholder="Giới thiệu về sách..."></textarea>
+            <label>Mô tả</label>
+            <textarea type="text" class="form-control" placeholder="Description..." [(ngModel)]='bookDes'></textarea>
           </div>
         </div>
         <div class="col-md-6">
@@ -136,9 +137,9 @@
             <button class="btn btn-primary save" (click)='routerUndo(type)'>Quay lại</button>
           </div>
         </div>
-      </div>
-      <div class="alert" [class.visible]="isVisible" style="margin-top: -50px; padding: 10px">
-        {{messageAlert}}
+        <div class="alert add-book" [class.visible]="isVisible" style="margin-top: 100px">
+          {{messageAlert}}
+        </div>
       </div>
     </div>
   </div>

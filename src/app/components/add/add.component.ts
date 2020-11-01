@@ -34,7 +34,7 @@ export class AddComponent implements OnInit, OnDestroy {
 	public imagePath: any = null;
 	public admin: Admin = null;
 
-	public idAdmin: string = '';
+	public book: Book = null;
 
 	// Staff
 	public name: string = '';
@@ -45,13 +45,26 @@ export class AddComponent implements OnInit, OnDestroy {
 	public base64textString: string = '';
 
 	// book
+	public bookName: string = '';
+	public bookPublisher: string = '';
+	public bookPrice: number;
+	public bookProvider: string = '';
+	public bookAuthor: string = '';
+	public bookHeight: number;
+	public bookWidth: number;
+	public bookCover: string = '';
+	public bookSku: number;
+	public bookPage: number;
+	public bookDes: string = '';
 
+	// title
 	public title: string = '';
-
 	public type: string = '';
 
+	// checksum
 	public Subscription: Subscription;
 
+	// alert
 	public isVisible: boolean = false;
 	public messageAlert: string = '';
 
@@ -59,6 +72,7 @@ export class AddComponent implements OnInit, OnDestroy {
 		public _sanitizer: DomSanitizer,
 		private router: Router,
 		public AdminService: AdminService,
+		public BookService: BookService,
 		public PublisherService: PublisherService,
 		public ProviderService: ProviderService,
 		public AuthorService: AuthorService,
@@ -89,11 +103,116 @@ export class AddComponent implements OnInit, OnDestroy {
 	}
 
 	addProfileBook() {
-		// forkJoin([
-		// 	this.PublisherService()
-		// 	]).subscribe(data => {
+		if (this.bookName == '' || this.bookPublisher == '' || this.bookPrice == undefined || this.bookProvider == '' ||
+			this.bookAuthor == '' || this.bookHeight == undefined || this.bookWidth == undefined || this.bookCover == '' ||
+			this.bookSku == undefined || this.bookPage == undefined || this.bookDes == '' || this.base64textString == '') {
+			if (this.isVisible) {
+				return;
+			}
+			this.isVisible = true;
+			this.messageAlert = 'Vui lòng điền đầy đủ thông tin';
+			setTimeout(() => this.isVisible = false, 1000);
+		}
+		else {
+			forkJoin([
+				this.PublisherService.getAllPublisher(),
+				this.ProviderService.getAllProvider(),
+				this.AuthorService.getAllAuthor()
+			]).subscribe(data => {
 
-		// }); 
+				let checkPublisher = false;
+
+				let checkAuthor = false;
+
+				let checkProvider = false;
+				// check
+				for (var i = data[0].length - 1; i >= 0; i--) {
+					if (this.bookPublisher == data[0][i]["name"]) {
+						checkPublisher = true;
+					}
+				}
+				for (var i = data[1].length - 1; i >= 0; i--) {
+					if (this.bookProvider == data[1][i]["name"]) {
+						checkProvider = true;
+					}
+				}
+				for (var i = data[2].length - 1; i >= 0; i--) {
+					if (this.bookAuthor == data[2][i]["name"]) {
+						checkAuthor = true;
+					}
+				}
+
+				// add new publisher
+				if (!checkPublisher) {
+					let publisher = new Publisher(this.bookPublisher);
+					this.Subscription = this.PublisherService.addPublisher(publisher).subscribe(data => {
+
+					}, error => {
+						this.PublisherService.handleError(error);
+					});
+				}
+
+				// add new provider
+				if (!checkProvider) {
+					let provider = new Provider(this.bookProvider);
+					this.Subscription = this.ProviderService.addProvider(provider).subscribe(data => {
+
+					}, error => {
+						this.PublisherService.handleError(error);
+					});
+				}
+
+				// add new author
+				if (!checkAuthor) {
+					let author = new Author(this.bookAuthor);
+					this.Subscription = this.AuthorService.addAuthor(author).subscribe(data => {
+
+					}, error => {
+						this.PublisherService.handleError(error);
+					});
+				}
+
+				forkJoin([
+					this.PublisherService.getAllPublisher(),
+					this.ProviderService.getAllProvider()
+				]).subscribe(data => {
+					let book: Book = null;
+					let publisherID = '';
+					let providerID = '';
+					for (var i = data[0].length - 1; i >= 0; i--) {
+						if (this.bookPublisher == data[0][i]["name"]) {
+							publisherID = data[0][i]["id"];
+						}
+					}
+					for (var i = data[1].length - 1; i >= 0; i--) {
+						if (this.bookProvider == data[1][i]["name"]) {
+							providerID = data[1][i]["id"];
+						}
+					}
+					book = new Book(
+						this.bookName, this.bookPage, this.bookPrice, this.bookSku, publisherID, providerID, this.bookHeight,
+						this.bookWidth, this.bookCover, this.base64textString, this.bookDes, 0, this.bookAuthor, 0, 0, 1
+					);
+					this.Subscription = this.BookService.addBook(book).subscribe(data => {
+						if (this.isVisible) {
+							return;
+						}
+						this.isVisible = true;
+						this.messageAlert = 'Thêm sách mới thành công';
+						setTimeout(() => this.isVisible = false, 1000);
+					}, error => {
+						this.BookService.handleError(error);
+						if (this.isVisible) {
+							return;
+						}
+						this.isVisible = true;
+						this.messageAlert = 'Thêm sách mới thất bại';
+						setTimeout(() => this.isVisible = false, 1000);
+					});
+				});
+			});
+		}
+
 	}
 
 	addProfileAdmin() {

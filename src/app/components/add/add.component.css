@@ -7,11 +7,22 @@ button.button-show-img {
 
 div.edit-profile-all {
   position: relative;
+  right: -25px;
+}
+
+div.add-profile-book {
+  position: relative;
   right: -70px;
 }
+
 .edit-profile-all-change {
   position: relative;
-  left: 235px;
+  left: 185px;
+}
+
+.add-profile-book-change {
+  position: relative;
+  left: 220px;
 }
 
 div.row:not(.register) {
@@ -165,4 +176,20 @@ input:not(#file) {
 .visible {
   opacity: 1;
   transform: translateY(1.25rem);
+}
+
+div.alert.add-book {
+  position: relative;
+  right: 110px;
+}
+
+/*book add*/
+div.row.book-add {
+  width: 950px;
+}
+div.row.book-img {
+  width: 950px;
+}
+h3.title-edit-profile.book-add {
+  margin-right: 75px;
 }

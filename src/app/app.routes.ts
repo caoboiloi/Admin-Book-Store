@@ -11,6 +11,7 @@ import { BookComponent } from './components/book/book.component';
 import { ShipperComponent } from './components/shipper/shipper.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddComponent } from './components/add/add.component';
+import { AuthorComponent } from './components/author/author.component';
 
 import { AuthGaurdService } from './services/auth-gaurd.service';
 
@@ -52,6 +53,11 @@ export const appRouter: Routes = [
 			{
 				path: 'publisher',
 				component: PublisherComponent,
+				canActivate: [AuthGaurdService]
+			},
+			{
+				path: 'author',
+				component: AuthorComponent,
 				canActivate: [AuthGaurdService]
 			},
 			{
