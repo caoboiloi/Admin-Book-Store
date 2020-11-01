@@ -36,6 +36,12 @@ export class AuthorComponent implements OnInit, OnDestroy {
 		});
 	}
 
+	removeAuthor(id: string) {
+		this.Subscription = this.AuthorService.deleteAuthorById(id).subscribe(data => {
+			
+		});
+	}
+
 	saveDataChart() {
 		this.Subscription = this.AuthorService.getAllAuthor().subscribe(data => {
 			for (var i = data.length - 1; i >= 0; i--) {

@@ -8,11 +8,12 @@ import { Author } from './../models/Author.class';
 })
 export class AuthorService {
 
-	public API : string = 'http://localhost:8080/api/authors';
-	public API_id : string = 'http://localhost:8080/api/authors/id/';
-	public API_create : string = 'http://localhost:8080/api/authors/create';
+	public API: string = 'http://localhost:8080/api/authors';
+	public API_id: string = 'http://localhost:8080/api/authors/id/';
+	public API_create: string = 'http://localhost:8080/api/authors/create';
+	public API_deletebyid: string = 'http://localhost:8080/api/authors/';
 	constructor(
-		public http:HttpClient
+		public http: HttpClient
 	) { }
 
 	getAllAuthor(): Observable<Author[]> {
@@ -29,8 +30,12 @@ export class AuthorService {
 		return this.http.post<Author>(this.API_create, author);
 	}
 
-	handleError(err){
-		if(err.error instanceof Error) {
+	deleteAuthorById(id: string): Observable<Author> {
+		return this.http.delete<Author>(this.API_deletebyid + id);
+	}
+
+	handleError(err) {
+		if (err.error instanceof Error) {
 			console.log(`Client-side error: ${err.error.message}`);
 		}
 		else {
