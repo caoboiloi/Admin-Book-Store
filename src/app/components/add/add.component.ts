@@ -4,6 +4,18 @@ import { Subscription, forkJoin } from 'rxjs';
 import { Admin } from './../../models/Admin.class';
 import { AdminService } from './../../services/admin.service';
 
+import { Book } from './../../models/Book.class';
+import { BookService } from './../../services/book.service';
+
+import { ProviderService } from './../../services/provider.service';
+import { Provider } from './../../models/Provider.class';
+
+import { PublisherService } from './../../services/publisher.service';
+import { Publisher } from './../../models/Publisher.class';
+
+import { AuthorService } from './../../services/author.service';
+import { Author } from './../../models/Author.class';
+
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { Router, ActivatedRoute } from '@angular/router';
@@ -32,6 +44,8 @@ export class AddComponent implements OnInit, OnDestroy {
 	public username: string = '';
 	public base64textString: string = '';
 
+	// book
+
 	public title: string = '';
 
 	public type: string = '';
@@ -45,6 +59,9 @@ export class AddComponent implements OnInit, OnDestroy {
 		public _sanitizer: DomSanitizer,
 		private router: Router,
 		public AdminService: AdminService,
+		public PublisherService: PublisherService,
+		public ProviderService: ProviderService,
+		public AuthorService: AuthorService,
 		public ActivatedRoute: ActivatedRoute,
 		public SendDataService: SendDataService
 	) { }
@@ -58,6 +75,10 @@ export class AddComponent implements OnInit, OnDestroy {
 				this.type = data["type"];
 				this.title = 'nhân viên';
 			}
+			if (data["type"] == "book") {
+				this.type = data["type"];
+				this.title = 'sách';
+			}
 		});
 	}
 
@@ -65,6 +86,14 @@ export class AddComponent implements OnInit, OnDestroy {
 		if (this.Subscription) {
 			this.Subscription.unsubscribe();
 		}
+	}
+
+	addProfileBook() {
+		// forkJoin([
+		// 	this.PublisherService()
+		// 	]).subscribe(data => {
+
+		// }); 
 	}
 
 	addProfileAdmin() {

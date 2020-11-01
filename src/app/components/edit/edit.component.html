@@ -1,7 +1,7 @@
 <ng-container *ngIf="admin != undefined && type == 'staff'">
   <div id="content" class="edit-profile-all" style="margin-left: 80px; margin-top: 85px" [ngClass]="status ? 'edit-profile-all-change' : ''">
     <div>
-      <h3 class="title-edit-profile"><b>SỬA THÔNG TIN {{title | uppercase}}</b></h3>
+      <h3 class="title-edit-profile" style="text-align: center;"><b>SỬA THÔNG TIN {{title | uppercase}}</b></h3>
       <div class="row img">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <img class="avatar" [src]="imagePath" width="300px" height="300px" style="margin-bottom: 30px;">
@@ -15,11 +15,11 @@
       </div>
       <div class="row enter">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <div class="label label-default" style="margin-right: 20px">Tên tài khoản:</div>
+          <label style="margin-right: 20px">Tên tài khoản:</label>
           <input type="text" class="form-control name" value="{{admin.name}}" placeholder="Name" value="{{name}}" [(ngModel)]='name'>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <div class="label label-default" style="margin-right: 20px">Quyền truy cập:</div>
+          <label style="margin-right: 20px">Quyền truy cập:</label>
           <input type="text" class="form-control role" value="{{admin.role}}" placeholder="Role" value="{{role}}" [(ngModel)]='role'>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 save">
@@ -34,9 +34,9 @@
   </div>
 </ng-container>
 <ng-container *ngIf="book != undefined && type == 'book'">
-  <div id="content" class="edit-profile-all" style="margin-left: 80px; margin-top: 85px" [ngClass]="status ? 'edit-profile-all-change' : ''">
+  <div id="content" class="edit-profile-all edit-book" style="margin-left: 80px; margin-top: 85px" [ngClass]="status ? 'edit-book-change' : ''">
     <div>
-      <h3 class="title-edit-profile"><b>SỬA THÔNG TIN {{title | uppercase}}</b></h3>
+      <h3 class="title-edit-profile" style="text-align: center;"><b>SỬA THÔNG TIN {{title | uppercase}}</b></h3>
       <div class="row img">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <img class="avatar" [src]="imagePath" width="300px" height="300px" style="margin-bottom: 30px;">

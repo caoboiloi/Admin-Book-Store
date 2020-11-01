@@ -1,6 +1,9 @@
 body {
 	background-color: #EEEFF3;
 }
+.title-staff {
+	text-align: center;
+}
 
 .button-add {
 	margin-bottom: 30px;
@@ -8,7 +11,7 @@ body {
 	vertical-align: middle;
 }
 
-th,td {
+tbody tr td {
 	text-align: center;
 	vertical-align: middle;
 }
