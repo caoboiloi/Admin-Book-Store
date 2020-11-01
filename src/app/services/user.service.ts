@@ -9,9 +9,10 @@ import { User } from './../models/User.class';
 export class UserService {
 
 	public API: string = 'http://localhost:8080/api/users';
+	public API_id: string = 'http://localhost:8080/api/users/id/';
 	public API_user: string = 'http://localhost:8080/api/users/username/';
 	public API_create: string = 'http://localhost:8080/api/users/create';
-	public API_deletebyid:string = 'http://localhost:8080/api/users/';
+	public API_deletebyid: string = 'http://localhost:8080/api/users/';
 	constructor(public http: HttpClient) { }
 
 	getByUsername(username): Observable<User> {
@@ -21,6 +22,11 @@ export class UserService {
 
 	createAccount(user: User): Observable<User> {
 		return this.http.post<User>(this.API_create, user);
+	}
+
+	getUserById(id: string): Observable<User> {
+		// trong angular 5+
+		return this.http.get<User>(this.API_id + id);
 	}
 
 	getAlluser(): Observable<User[]> {

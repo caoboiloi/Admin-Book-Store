@@ -41,44 +41,43 @@ export class LoginComponent implements OnInit, OnDestroy {
 			setTimeout(() => this.isVisible = false, 1000);
 		}
 		else {
-				this.Subscription = this.AdminService.getByUsername(this.username).subscribe(data => {
-			if (btoa(this.password) == data[0]['pass']) {
-				sessionStorage.setItem('username', this.username);
-				sessionStorage.setItem('id', data[0]["id"]);
-				if (data[0]["role"] == 3) {
-					this.router.navigate(['admin/staff']);
+			this.Subscription = this.AdminService.getByUsername(this.username).subscribe(data => {
+				if (btoa(this.password) == data[0]['pass']) {
+					sessionStorage.setItem('username', this.username);
+					sessionStorage.setItem('id', data[0]["id"]);
+					this.invalidLogin = false;
+					let access = data[0]['access'] + 1;
+					let ac = new Admin(data[0]['name'], data[0]['pass'], data[0]['username'], data[0]['role'], access, data[0]['img']);
+					this.Subscription = this.AdminService.updateAccess(ac, data[0]["id"]).subscribe(access => {
+						if (data[0]["role"] == 3) {
+							this.router.navigate(['admin/staff']);
+						}
+						else {
+							this.router.navigate(['admin/provider']);
+						}
+					}, error => {
+						this.AdminService.handleError(error);
+					});
+				} else {
+					this.invalidLogin = true;
+					if (this.isVisible) {
+						return;
+					}
+					this.isVisible = true;
+					this.messageAlert = 'Mật khẩu không đúng, vui lòng nhập lại';
+					setTimeout(() => this.isVisible = false, 1000);
 				}
-				else {
-					this.router.navigate(['admin/provider']);
-				}
-				this.invalidLogin = false;
-				let access = data[0]['access'] + 1;
-				let ac = new Admin(data[0]['name'], data[0]['pass'], data[0]['username'], data[0]['role'], access, data[0]['img']);
-				this.Subscription = this.AdminService.updateAccess(ac, data[0]["id"]).subscribe(access => {
-
-				}, error => {
-					this.AdminService.handleError(error);
-				});
-			} else {
+			}, error => {
+				this.AdminService.handleError(error);
+				this.invalidLogin = true;
 				this.invalidLogin = true;
 				if (this.isVisible) {
 					return;
 				}
 				this.isVisible = true;
-				this.messageAlert = 'Mật khẩu không đúng, vui lòng nhập lại';
+				this.messageAlert = 'Đăng nhập thất bại';
 				setTimeout(() => this.isVisible = false, 1000);
-			}
-		}, error => {
-			this.AdminService.handleError(error);
-			this.invalidLogin = true;
-			this.invalidLogin = true;
-			if (this.isVisible) {
-				return;
-			}
-			this.isVisible = true;
-			this.messageAlert = 'Đăng nhập thất bại';
-			setTimeout(() => this.isVisible = false, 1000);
-		});	
+			});
 		}
 
 	}

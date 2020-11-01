@@ -1,5 +1,10 @@
 <div id="content" class="p-4 p-md-5 pt-5" [ngClass]="status ? 'content-account' : ''">
   <h3 class="title-staff"><b>BẢNG ĐIỀU KHIỂN</b></h3>
+  <div class="button-add">
+    <button type="button" class="btn btn-primary" [routerLink]="['/admin/add']" [queryParams]="{type:'staff'}">
+      <fa-icon [icon]="faAddressCard"></fa-icon>
+    </button>
+  </div>
   <div class="row title-sum">
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" class="sum-title" id="one">
       <b>KHÁCH HÀNG</b> <br>
@@ -52,7 +57,7 @@
               <!-- <td>{{account.pass | formatDecodeBase64}}</td> -->
               <td>{{account.role}}</td>
               <td>
-                <a [routerLink]="['/admin/edit']" [queryParams] = "{type:'staff',id: account.id}">Sửa</a> | 
+                <a [routerLink]="['/admin/edit']" [queryParams]="{type:'staff',id: account.id}">Sửa</a> |
                 <a href="admin/staff" (click)='removeAc(account.id)'>Xóa</a>
               </td>
             </ng-container>

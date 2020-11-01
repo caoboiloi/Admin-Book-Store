@@ -10,6 +10,7 @@ import { UserComponent } from './components/user/user.component';
 import { BookComponent } from './components/book/book.component';
 import { ShipperComponent } from './components/shipper/shipper.component';
 import { EditComponent } from './components/edit/edit.component';
+import { AddComponent } from './components/add/add.component';
 
 import { AuthGaurdService } from './services/auth-gaurd.service';
 
@@ -29,9 +30,14 @@ export const appRouter: Routes = [
 		canActivate: [AuthGaurdService],
 		children: [
 			{
+				path: 'add',
+				component: AddComponent,
+				canActivate: [AuthGaurdService]
+			},
+			{
 				path: 'edit',
 				component: EditComponent,
-				canActivate: [AuthGaurdService],
+				canActivate: [AuthGaurdService]
 			},
 			{
 				path: 'staff',

@@ -16,9 +16,19 @@ export class BookService {
 	public API_deletebyid: string = 'http://localhost:8080/api/books/';
 	public API_sale: string = 'http://localhost:8080/api/books/sale/1';
 	public API_id: string = 'http://localhost:8080/api/books/id/';
+	public API_create: string = 'http://localhost:8080/api/books/create';
+	public API_update: string = 'http://localhost:8080/api/books/';
 	constructor(
 		public http: HttpClient
 	) { }
+
+	addBook(book: Book): Observable<Book> {
+		return this.http.post<Book>(this.API_create, book);
+	}
+
+	updateBook(book: Book, id: string): Observable<Book> {
+		return this.http.put<Book>(this.API_update + id, book);
+	}
 
 	getAllBook(): Observable<Book[]> {
 		// trong angular 5+

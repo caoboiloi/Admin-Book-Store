@@ -16,15 +16,58 @@
       <div class="row enter">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
           <div class="label label-default" style="margin-right: 20px">Tên tài khoản:</div>
-          <input type="text" class="name" value="{{admin.name}}" placeholder="Name" value="{{name}}" [(ngModel)]='name' >
+          <input type="text" class="form-control name" value="{{admin.name}}" placeholder="Name" value="{{name}}" [(ngModel)]='name'>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
           <div class="label label-default" style="margin-right: 20px">Quyền truy cập:</div>
-          <input type="text" class="role" value="{{admin.role}}" placeholder="Role" value="{{role}}" [(ngModel)]='role' >
+          <input type="text" class="form-control role" value="{{admin.role}}" placeholder="Role" value="{{role}}" [(ngModel)]='role'>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 save">
           <button class="btn btn-primary profile-button" type="button" (click)='editProfileAdmin()' style="margin-right: 20px">Lưu thông tin</button>
           <button class="btn btn-primary profile-button" type="button" (click)='routerUndo(type)'>Quay lại</button>
+        </div>
+      </div>
+      <div class="alert" [class.visible]="isVisible" style="margin-top: -20px; padding: 10px">
+        {{messageAlert}}
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="book != undefined && type == 'book'">
+  <div id="content" class="edit-profile-all" style="margin-left: 80px; margin-top: 85px" [ngClass]="status ? 'edit-profile-all-change' : ''">
+    <div>
+      <h3 class="title-edit-profile"><b>SỬA THÔNG TIN {{title | uppercase}}</b></h3>
+      <div class="row img">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <img class="avatar" [src]="imagePath" width="300px" height="300px" style="margin-bottom: 30px;">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <input type="file" name="file" id="file" (change)='handleSeleted($event)' />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <button class="btn btn-primary show-img" type="button" (click)='handleShow(base64textString)'>Hiển thị ảnh</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Tên sách</label>
+            <input type="text" class="form-control" placeholder="Name" ng-value="book.name" [(ngModel)]='name' />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Giá mới</label>
+            <input type="number" class="form-control" placeholder="Price" ng-value="book.price" [(ngModel)]='price' />
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <button class="btn btn-primary save" (click)='editProfileBook()'>Lưu thông tin</button>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary save" (click)='routerUndo(type)'>Quay lại</button>
+          </div>
         </div>
       </div>
       <div class="alert" [class.visible]="isVisible" style="margin-top: -20px; padding: 10px">

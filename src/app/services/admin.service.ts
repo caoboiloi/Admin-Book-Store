@@ -9,10 +9,11 @@ import { Admin } from './../models/Admin.class';
 export class AdminService {
 
 	public API_user: string = 'http://localhost:8080/api/admins/username/';
-	public API_id : string = 'http://localhost:8080/api/admins/id/';
+	public API_id: string = 'http://localhost:8080/api/admins/id/';
 	public API: string = 'http://localhost:8080/api/admins';
 	public API_deletebyid: string = 'http://localhost:8080/api/admins/';
 	public API_update: string = 'http://localhost:8080/api/admins/';
+	public API_create:string = 'http://localhost:8080/api/admins/create';
 	constructor(public http: HttpClient) { }
 
 	getByUsername(username): Observable<Admin> {
@@ -34,6 +35,10 @@ export class AdminService {
 
 	deleteACById(id: string): Observable<Admin> {
 		return this.http.delete<Admin>(this.API_deletebyid + id);
+	}
+
+	createAccountAdmin(admin: Admin): Observable<Admin> {
+		return this.http.post<Admin>(this.API_create, admin);
 	}
 
 	handleError(err) {

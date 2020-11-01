@@ -9,6 +9,7 @@ import { Publisher } from './../models/Publisher.class';
 export class PublisherService {
 
 	public API: string = 'http://localhost:8080/api/publishers';
+	public API_id : string = 'http://localhost:8080/api/publishers/id/';
 	public API_deletebyid:string = 'http://localhost:8080/api/publishers/';
 	constructor(
 		public http:HttpClient
@@ -17,6 +18,10 @@ export class PublisherService {
 	getAllPublisher(): Observable<Publisher[]> {
 		// trong angular 5+
 		return this.http.get<Publisher[]>(this.API);
+	}
+
+	getPublisherById(id:string): Observable<Publisher> {
+		return this.http.get<Publisher>(this.API_id + id);
 	}
 
 	deleteProviderById(id: string): Observable<Publisher> {

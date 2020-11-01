@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 import * as CanvasJS from './../../../assets/canvasjs/canvasjs.min';
 
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
+
 import { Subscription, forkJoin } from 'rxjs';
 
 import { Admin } from './../../models/Admin.class';
@@ -30,7 +32,7 @@ import { FormatDecodeBase64Pipe } from './../../pipes/format-decode-base64.pipe'
 })
 export class AccountComponent implements OnInit, OnDestroy {
 
-
+	faAddressCard = faAddressCard;
 	public isIdLogin: string = sessionStorage.getItem('id');
 	public status:boolean = false;
 	public accounts: Admin[] = [];

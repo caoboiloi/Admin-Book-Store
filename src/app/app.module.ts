@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 // receive data from form in angular with ReactiveFormsModule
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -26,6 +28,7 @@ import { BookComponent } from './components/book/book.component';
 import { ShipperComponent } from './components/shipper/shipper.component';
 import { FormatImgPipe } from './pipes/format-img.pipe';
 import { EditComponent } from './components/edit/edit.component';
+import { AddComponent } from './components/add/add.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import { EditComponent } from './components/edit/edit.component';
     BookComponent,
     ShipperComponent,
     FormatImgPipe,
-    EditComponent
+    EditComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import { EditComponent } from './components/edit/edit.component';
     HttpClientModule,
     CommonModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

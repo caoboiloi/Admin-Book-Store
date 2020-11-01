@@ -9,6 +9,7 @@ import { Provider } from './../models/Provider.class';
 export class ProviderService {
 
 	public API:string = 'http://localhost:8080/api/providers';
+	public API_id : string = 'http://localhost:8080/api/providers/id/';
 	public API_deletebyid:string = 'http://localhost:8080/api/providers/';
 	constructor(
 		public http:HttpClient
@@ -18,6 +19,11 @@ export class ProviderService {
 		// trong angular 5+
 		return this.http.get<Provider[]>(this.API);
 	}
+
+	getProviderById(id:string): Observable<Provider> {
+		// trong angular 5+
+		return this.http.get<Provider>(this.API_id + id);
+	} 
 
 	deleteProviderById(id: string): Observable<Provider> {
 		return this.http.delete<Provider>(this.API_deletebyid + id);

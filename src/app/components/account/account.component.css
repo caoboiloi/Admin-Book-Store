@@ -2,6 +2,12 @@ body {
 	background-color: #EEEFF3;
 }
 
+.button-add {
+	margin-bottom: 30px;
+	text-align: right;
+	vertical-align: middle;
+}
+
 th,td {
 	text-align: center;
 	vertical-align: middle;
@@ -35,6 +41,7 @@ div.total {
 }
 
 .sum-title {
+	box-shadow:1px 1px 10px 1px grey;
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 10px;
 	padding-top: 10px;

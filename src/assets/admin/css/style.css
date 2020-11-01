@@ -8180,7 +8180,7 @@ h1, h2, h3, h4, h5,
   min-width: 300px;
   max-width: 300px;
   background: #32373d;
-  padding-bottom: 300px;
+  padding-bottom: 550px;
   color: #fff;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -8189,7 +8189,7 @@ h1, h2, h3, h4, h5,
   #sidebar .h6 {
     color: #fff; }
   #sidebar.active {
-    padding-bottom: 300px;
+    padding-bottom: 550px;
     margin-left: -300px; }
     #sidebar.active .custom-menu {
       margin-right: -50px; }
