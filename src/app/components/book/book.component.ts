@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild  } from '@angular/core';
 import * as CanvasJS from './../../../assets/canvasjs/canvasjs.min';
 
 import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
@@ -30,6 +30,9 @@ export class BookComponent implements OnInit, OnDestroy {
 	public items = [];
 	public books = [];
 	public page = 1;
+
+	@ViewChild('buttonClick') buttonClick: ElementRef;
+	
 	constructor(
 		public BookService: BookService,
 		public PublisherService: PublisherService,
@@ -39,6 +42,10 @@ export class BookComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		this.getAllBook();
+		// trigger click
+		setTimeout(() => {
+			this.buttonClick.nativeElement.click();
+		}, 200);
 	}
 
 	removeBook(id) {
@@ -59,7 +66,7 @@ export class BookComponent implements OnInit, OnDestroy {
 					this.ProviderService.getProviderById(data[i]["provider"]),
 					this.UserService.getUserById(data[i]["provider"])
 				]).subscribe(dataB => {
-					let provider : string = '';
+					let provider: string = '';
 					if (dataB[2] != null) {
 						provider = dataB[2]["name"];
 					}
@@ -67,18 +74,19 @@ export class BookComponent implements OnInit, OnDestroy {
 						provider = dataB[1]["name"];
 					}
 					this.books.push({
-						id:book["id"],
-						img:book["img"],
-						name:book["name"],
-						sku:book["sku"],
-						author:book["author"],
-						price:book["price"],
-						page:book["page"],
-						cover:book["cover"],
-						width:book["width"],
-						height:book["height"],
-						provider:provider,
-						publisher:dataB[0]["name"]});
+						id: book["id"],
+						img: book["img"],
+						name: book["name"],
+						sku: book["sku"],
+						author: book["author"],
+						price: book["price"],
+						page: book["page"],
+						cover: book["cover"],
+						width: book["width"],
+						height: book["height"],
+						provider: provider,
+						publisher: dataB[0]["name"]
+					});
 				}, error => {
 					this.BookService.handleError(error);
 				});
