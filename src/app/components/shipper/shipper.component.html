@@ -19,7 +19,10 @@
           <tr *ngFor="let shipper of shippers | paginate: { itemsPerPage: 4, currentPage: page }">
             <td>{{shipper.id}}</td>
             <td>{{shipper.name}}</td>
-            <td><a href="admin/shipper" (click)='removeProvider(shipper.id)'>Xóa</a></td>
+            <td>
+              <a href="" [routerLink]="['/admin/edit']" [queryParams]="{type:'shipper',id: shipper.id}"></a> | 
+              <a href="admin/shipper" (click)='removeProvider(shipper.id)'>Xóa</a>
+            </td>
           </tr>
           <tr>
             <td colspan="3">

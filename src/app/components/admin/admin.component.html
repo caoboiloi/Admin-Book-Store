@@ -51,7 +51,7 @@
         </div>
       </div>
       <ul class="list-unstyled components mb-5">
-        <li>
+        <li *ngIf="isAccountLogin.role == 3">
           <a [routerLink]="['/admin/staff']"><span class="fa fa-home mr-3"></span> Nhân Viên</a>
         </li>
         <li>
@@ -70,7 +70,7 @@
           <a [routerLink]="['/admin/shipper']"><span class="fa fa-cog mr-3"></span> Nhà Vận Chuyển</a>
         </li>
         <li>
-          <a href="#"><span class="fa fa-support mr-3"></span> Đổi Mật Khẩu</a>
+          <a [routerLink]="['/admin/edit']" [queryParams]="{type:'profile'}"><span class="fa fa-support mr-3"></span> Cập Nhật Thông Tin</a>
         </li>
         <li>
           <a *ngIf="AdminService.isUserLoggedIn()" [routerLink]="['/logout']">

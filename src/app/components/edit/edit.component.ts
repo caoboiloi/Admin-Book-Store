@@ -37,6 +37,12 @@ export class EditComponent implements OnInit, OnDestroy {
 	public role: number;
 	public price: number;
 
+	// admin
+	public passOld: string = '';
+	public passNew: string = '';
+	public passConfirm: string = '';
+	public nameProfile: string = '';
+
 	public title: string = '';
 
 	public type: string = '';
@@ -71,12 +77,85 @@ export class EditComponent implements OnInit, OnDestroy {
 				this.idBook = data["id"];
 				this.title = "sách";
 			}
+			if (data["type"] == 'profile') {
+				this.type = data["type"];
+				this.loadAdmin();
+				this.title = "";
+			}
 		});
 	}
 
 	ngOnDestroy(): void {
 		if (this.Subscription) {
 			this.Subscription.unsubscribe();
+		}
+	}
+
+	loadAdmin() {
+		let username = sessionStorage.getItem("username");
+		this.Subscription = this.AdminService.getByUsername(username).subscribe(data => {
+			this.base64textString = data[0]["img"];
+			this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl(
+				'data:image/jpg;base64,' + this.base64textString
+			);
+		});
+	}
+
+	updatePass() {
+		if (this.base64textString == '' || this.passOld == '' || this.passNew == '' || this.passConfirm == '' || this.nameProfile == '') {
+			if (this.isVisible) {
+				return;
+			}
+			this.isVisible = true;
+			this.messageAlert = 'Vui lòng điền đầy đủ thông tin';
+			setTimeout(() => this.isVisible = false, 1000);
+		}
+		else if (this.passNew != this.passConfirm) {
+			if (this.isVisible) {
+				return;
+			}
+			this.isVisible = true;
+			this.messageAlert = 'Xác thực mật khẩu không đúng, vui lòng nhập lại';
+			setTimeout(() => this.isVisible = false, 1000);
+		}
+		else {
+			let userAdmin = sessionStorage.getItem("username");
+			this.Subscription = this.AdminService.getByUsername(userAdmin).subscribe(data => {
+				if (btoa(this.passOld) != data[0]["pass"]) {
+					if (this.isVisible) {
+						return;
+					}
+					this.isVisible = true;
+					this.messageAlert = 'Mật khẩu cũ không đúng, vui lòng nhập lại';
+					setTimeout(() => this.isVisible = false, 1000);
+				}
+				else {
+					let idadmin = sessionStorage.getItem("id");
+					let admin: Admin = new Admin(
+						this.nameProfile,
+						btoa(this.passNew),
+						userAdmin,
+						data[0]["role"],
+						data[0]["access"],
+						this.base64textString);
+					this.Subscription = this.AdminService.updateAccess(admin, idadmin).subscribe(data => {
+						if (this.isVisible) {
+							return;
+						}
+						this.isVisible = true;
+						this.messageAlert = 'Cập nhật thông tin thành công';
+						setTimeout(() => this.isVisible = false, 1000);
+					}, error => {
+						this.AdminService.handleError(error);
+						if (this.isVisible) {
+							return;
+						}
+						this.isVisible = true;
+						this.messageAlert = 'Cập nhật thông tin thất bại';
+						setTimeout(() => this.isVisible = false, 1000);
+					});
+				}
+			});
 		}
 	}
 

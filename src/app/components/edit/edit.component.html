@@ -76,3 +76,58 @@
     </div>
   </div>
 </ng-container>
+<ng-container *ngIf="type == 'profile'">
+  <div id="content" class="edit-profile-all edit-pass" style="margin-left: 80px; margin-top: 85px" [ngClass]="status ? 'edit-pass-change' : ''">
+    <div>
+      <h3 class="title-edit-profile" style="text-align: center; width: 940px"><b>CẬP NHẬT THÔNG TIN {{title | uppercase}}</b></h3>
+      <div class="row img-profile-admin">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <img class="avatar" [src]="imagePath" width="300px" height="300px" style="margin-bottom: 30px;">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <input type="file" name="file" id="file" (change)='handleSeleted($event)' />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <button class="btn btn-primary show-img" type="button" (click)='handleShow(base64textString)'>Hiển thị ảnh</button>
+        </div>
+      </div>
+      <div class="row profile-admin">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Tên tài khoản</label>
+            <input type="text" class="form-control" placeholder="Name" [(ngModel)]='nameProfile' />
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Mật khẩu cũ</label>
+            <input type="password" class="form-control" placeholder="Old password" [(ngModel)]='passOld' />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Mật khẩu mới</label>
+            <input type="password" class="form-control" placeholder="New password" [(ngModel)]='passNew' />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Xác nhận mật khẩu</label>
+            <input type="password" class="form-control" placeholder="Confirm password" [(ngModel)]='passConfirm' />
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <button class="btn btn-primary savePass" (click)='updatePass()'>Lưu thông tin</button>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary savePass" (click)='routerUndo("staff")'>Quay lại</button>
+          </div>
+        </div>
+      </div>
+      <div class="alert" [class.visible]="isVisible" style="margin-top: -20px; padding: 10px; width: 950px;">
+        {{messageAlert}}
+      </div>
+    </div>
+  </div>
+</ng-container>
