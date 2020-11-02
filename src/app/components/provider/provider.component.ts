@@ -1,5 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import * as CanvasJS from './../../../assets/canvasjs/canvasjs.min';
+
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
 
 import { ProviderService } from './../../services/provider.service';
 import { Provider } from './../../models/Provider.class';
@@ -8,6 +10,7 @@ import { BookService } from './../../services/book.service';
 import { Book } from './../../models/Book.class';
 
 import { Subscription, forkJoin } from 'rxjs';
+import { SendDataService } from './../../services/send-data.service';
 
 @Component({
 	selector: 'app-provider',
@@ -16,18 +19,34 @@ import { Subscription, forkJoin } from 'rxjs';
 })
 export class ProviderComponent implements OnInit, OnDestroy {
 
+	faAddressCard = faAddressCard;
+	public status: boolean = false;
 	public providers: Provider[] = [];
 	public items = [];
 	public Subscription: Subscription;
 	public page = 1;
+
+	@ViewChild('buttonClick1') buttonClick1: ElementRef;
+	@ViewChild('buttonClick2') buttonClick2: ElementRef;
 	constructor(
 		public ProviderService: ProviderService,
-		public BookService: BookService
+		public BookService: BookService,
+		public SendDataService: SendDataService
 	) { }
 
 	ngOnInit(): void {
+		this.SendDataService.On("account").subscribe(data => {
+			this.status = data;
+		});
 		this.loadAllProvider();
 		this.saveDataChart();
+		setTimeout(() => {
+			this.buttonClick1.nativeElement.click();
+		}, 200);
+
+		setTimeout(() => {
+			this.buttonClick2.nativeElement.click();
+		}, 200);
 	}
 
 	handlePageChange(event) {
@@ -58,7 +77,7 @@ export class ProviderComponent implements OnInit, OnDestroy {
 			title: {
 				text: "Tỉ trọng sách của các nhà cung cấp",
 				fontFamily: 'Candara',
-				fontSize : 20
+				fontSize: 20
 			},
 			data: [{
 				type: "pie",
@@ -74,17 +93,17 @@ export class ProviderComponent implements OnInit, OnDestroy {
 	showChartHightPerformance(items) {
 		let dataPoints = [];
 		for (var i = items.length - 1; i >= 0; i--) {
-			dataPoints.push({y:items[i].y, label: items[i].name});
+			dataPoints.push({ y: items[i].y, label: items[i].name });
 		}
 		let chart = new CanvasJS.Chart("chartContainer-2", {
-			theme:'light2',
+			theme: 'light2',
 			zoomEnabled: true,
 			animationEnabled: true,
 			exportEnabled: true,
 			title: {
 				text: "Số lượng sách của các nhà cung cấp",
 				fontFamily: 'Candara',
-				fontSize : 20
+				fontSize: 20
 			},
 			data: [
 				{

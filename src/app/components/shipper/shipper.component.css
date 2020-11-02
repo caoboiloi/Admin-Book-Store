@@ -1,10 +1,29 @@
 .header-table {
 	color: red;
 }
-.title-provider {
-	margin-top: 100px;
+.button-add {
+	margin-bottom: 30px;
+	text-align: right;
+	vertical-align: middle;
+}
+tbody tr td:not(.img-show-book) {
 	text-align: center;
+	vertical-align: middle;
+}
+.title-provider {
 	font-family: Arial, Helvetica, sans-serif;
+	color: grey;
+	margin-left: -18px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+div.p-4.p-md-5.pt-5.content-shipper {
+	position: relative;
+	right: -30px;
+}
+.content-shipper-change {
+	position: relative;
+	left: 175px;
 }
 .chartContainer {
 	margin-bottom: 40px;
@@ -15,4 +34,20 @@
 }
 .pagination {
 	margin: 0 auto;
+}
+
+/*row*/
+.row {
+	box-shadow:1px 1px 20px 1px grey;
+}
+
+div.row.img {
+	margin-bottom: 40px;
+}
+div.row.chart-author {
+	padding-bottom: 30px;
+}
+th,td {
+	text-align: center;
+	vertical-align: middle;
 }

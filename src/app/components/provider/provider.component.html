@@ -1,5 +1,10 @@
-<div id="content" class="p-4 p-md-5 pt-5">
-  <h3 class="title-provider">NHÀ CUNG CẤP</h3>
+<div id="content" class="p-4 p-md-5 pt-5 content-provider" [ngClass]="status ? 'content-provider-change' : ''">
+  <h3 class="title-provider" style="text-align: center;"><b>NHÀ CUNG CẤP</b></h3>
+  <div class="button-add">
+    <button type="button" class="btn btn-primary" [routerLink]="['/admin/add']" [queryParams]="{type:'publisher'}">
+      <fa-icon [icon]="faAddressCard"></fa-icon>
+    </button>
+  </div>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" [style.margin-top.px]='30'>
       <table class="table table-bordered table-hover">
@@ -14,7 +19,10 @@
           <tr *ngFor="let provider of providers | paginate: { itemsPerPage: 4, currentPage: page }">
             <td>{{provider.id}}</td>
             <td>{{provider.name}}</td>
-            <td><a href="admin/provider" (click)='removeProvider(provider.id)'>Xóa</a></td>
+            <td>
+              <a href="#" [routerLink]="['/admin/edit']" [queryParams]="{type:'provider',id: provider.id}">Sửa</a> | 
+              <a href="admin/provider" (click)='removeProvider(provider.id)'>Xóa</a>
+            </td>
           </tr>
           <tr>
             <td colspan="3">
@@ -30,7 +38,7 @@
   <div>_____________________________________________________________________________________________________________________________________________</div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <button (click)='showChartCicle(items)' class="buttonChart" class="btn btn-success">
+      <button #buttonClick1 (click)='showChartCicle(items)' class="buttonChart" class="btn btn-success">
         Đồ thị tỉ trọng sách của các nhà cung cấp
       </button>
       <br>
@@ -38,7 +46,7 @@
       <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <button (click)='showChartHightPerformance(items)' class="buttonChart" class="btn btn-success">
+      <button #buttonClick2 (click)='showChartHightPerformance(items)' class="buttonChart" class="btn btn-success">
         Đồ thị số lượng sách của các nhà cung cấp
       </button>
       <br>

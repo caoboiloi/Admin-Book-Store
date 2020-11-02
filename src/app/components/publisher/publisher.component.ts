@@ -17,7 +17,7 @@ import { SendDataService } from './../../services/send-data.service';
 	templateUrl: './publisher.component.html',
 	styleUrls: ['./publisher.component.css']
 })
-export class PublisherComponent implements OnInit {
+export class PublisherComponent implements OnInit, OnDestroy {
 
 	faAddressCard = faAddressCard;
 	public status: boolean = false;

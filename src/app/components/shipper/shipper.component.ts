@@ -1,5 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import * as CanvasJS from './../../../assets/canvasjs/canvasjs.min';
+
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
 
 import { ShipperService } from './../../services/shipper.service';
 import { Shipper } from './../../models/Shipper.class';
@@ -12,6 +14,8 @@ import { Buy } from './../../models/Buy.class';
 
 import { Subscription, forkJoin } from 'rxjs';
 
+import { SendDataService } from './../../services/send-data.service';
+
 @Component({
 	selector: 'app-shipper',
 	templateUrl: './shipper.component.html',
@@ -19,19 +23,36 @@ import { Subscription, forkJoin } from 'rxjs';
 })
 export class ShipperComponent implements OnInit {
 
+	faAddressCard = faAddressCard;
+	public status: boolean = false;
+
 	public shippers: Shipper[] = [];
 	public items = [];
 	public Subscription: Subscription;
 	public page = 1;
+
+	@ViewChild('buttonClick1') buttonClick1: ElementRef;
+	@ViewChild('buttonClick2') buttonClick2: ElementRef;
 	constructor(
 		public ShipperService: ShipperService,
 		public BookService: BookService,
-		public BuyService: BuyService
+		public BuyService: BuyService,
+		public SendDataService: SendDataService
 	) { }
 
 	ngOnInit(): void {
+		this.SendDataService.On("account").subscribe(data => {
+			this.status = data;
+		});
 		this.loadAllShipper();
 		this.saveDataChart();
+		setTimeout(() => {
+			this.buttonClick1.nativeElement.click();
+		}, 200);
+
+		setTimeout(() => {
+			this.buttonClick2.nativeElement.click();
+		}, 200);
 	}
 
 	loadAllShipper() {

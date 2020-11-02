@@ -1,5 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import * as CanvasJS from './../../../assets/canvasjs/canvasjs.min';
+
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
 
 import { AuthorService } from './../../services/author.service';
 import { Author } from './../../models/Author.class';
@@ -8,6 +10,7 @@ import { BookService } from './../../services/book.service';
 import { Book } from './../../models/Book.class';
 
 import { Subscription, forkJoin } from 'rxjs';
+import { SendDataService } from './../../services/send-data.service';
 
 @Component({
 	selector: 'app-author',
@@ -16,18 +19,34 @@ import { Subscription, forkJoin } from 'rxjs';
 })
 export class AuthorComponent implements OnInit, OnDestroy {
 
+	faAddressCard = faAddressCard;
+	public status: boolean = false;
 	public authors: Author[] = [];
 	public items = [];
 	public Subscription: Subscription;
 	public page = 1;
+
+	@ViewChild('buttonClick1') buttonClick1: ElementRef;
+	@ViewChild('buttonClick2') buttonClick2: ElementRef;
 	constructor(
 		public AuthorService: AuthorService,
-		public BookService: BookService
+		public BookService: BookService,
+		public SendDataService: SendDataService
 	) { }
 
 	ngOnInit(): void {
+		this.SendDataService.On("account").subscribe(data => {
+			this.status = data;
+		});
 		this.loadAllAuthor();
 		this.saveDataChart();
+		setTimeout(() => {
+			this.buttonClick1.nativeElement.click();
+		}, 200);
+
+		setTimeout(() => {
+			this.buttonClick2.nativeElement.click();
+		}, 200);
 	}
 
 	loadAllAuthor() {
