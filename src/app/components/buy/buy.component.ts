@@ -57,18 +57,18 @@ export class BuyComponent implements OnInit, OnDestroy {
 						this.BookService.getBookById(data[i]["idbook"]),
 						this.ShipperService.getShipperById(data[i]["idshipper"])
 					]).subscribe(dataB => {
-						if (dataB[0] != undefined && data[1] != undefined && data[2] != undefined) {
-							this.buys.push({
-								id: buy["id"],
-								amount: buy["amount"],
-								book: dataB[1]["name"],
-								img: dataB[1]["img"],
-								allprice: buy["allprice"],
-								price: buy["price"],
-								user: dataB[0]["name"],
-								shipper: dataB[2]["name"]
-							});
-						}
+						// if (dataB[0].length && data[1].length && data[2].length) {
+						this.buys.push({
+							id: buy["id"],
+							amount: buy["amount"],
+							book: dataB[1]["name"],
+							img: dataB[1]["img"],
+							allprice: buy["allprice"],
+							price: buy["price"],
+							user: dataB[0]["name"],
+							shipper: dataB[2]["name"]
+						});
+						// }
 					});
 				}
 			}
@@ -80,7 +80,7 @@ export class BuyComponent implements OnInit, OnDestroy {
 	}
 
 	removeBuy(id: string) {
-
+		this.Subscription = this.BuyService.deleteBuyById(id).subscribe(data => { });
 	}
 
 	chartHighPerformance(dataPoints) {

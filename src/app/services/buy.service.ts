@@ -12,7 +12,8 @@ export class BuyService {
 	public API: string = 'http://localhost:8080/api/buys';
 	public API_create: string = 'http://localhost:8080/api/buys/create';
 	public API_update: string = 'http://localhost:8080/api/buys/id/';
-	public API_idshipper:string = 'http://localhost:8080/api/buys/idshipper/';
+	public API_idshipper: string = 'http://localhost:8080/api/buys/idshipper/';
+	public API_deletebyid: string = 'http://localhost:8080/api/buys/'
 
 	constructor(
 		public http: HttpClient
@@ -26,11 +27,15 @@ export class BuyService {
 		return this.http.post<Buy>(this.API_create, buy);
 	}
 
+	deleteBuyById(id: string): Observable<Buy> {
+		return this.http.delete<Buy>(this.API_deletebyid + id);
+	}
+
 	updateBuy(buy: Buy, id: string): Observable<Buy> {
 		return this.http.put<Buy>(this.API_update + id, buy);
 	}
 
-	getBuyByIdshipper(id:string):Observable<Buy[]> {
+	getBuyByIdshipper(id: string): Observable<Buy[]> {
 		return this.http.get<Buy[]>(this.API_idshipper + id);
 	}
 
