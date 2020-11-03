@@ -113,6 +113,14 @@ export class AddComponent implements OnInit, OnDestroy {
 			this.messageAlert = 'Vui lòng điền đầy đủ thông tin';
 			setTimeout(() => this.isVisible = false, 1000);
 		}
+		else if (this.bookPrice <= 0) {
+			if (this.isVisible) {
+				return;
+			}
+			this.isVisible = true;
+			this.messageAlert = 'Giá sách không là số âm, vui lòng nhập lại';
+			setTimeout(() => this.isVisible = false, 1000);
+		}
 		else {
 			forkJoin([
 				this.PublisherService.getAllPublisher(),
