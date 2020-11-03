@@ -1,0 +1,55 @@
+<div id="content" class="p-4 p-md-5 pt-5">
+  <h3 class="title-provider" style="text-align: center;"><b>HÓA ĐƠN THANH TOÁN</b></h3>
+  <div class="button-add">
+    <!-- <button type="button" class="btn btn-primary" [routerLink]="['/admin/add']" [queryParams]="{type:'buy'}">
+      <fa-icon [icon]="faAddressCard"></fa-icon>
+    </button> -->
+    <div>
+      
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" #buttonClick class="btn btn-success" (click)='chartHighPerformance(items)'>Đồ thị biến động giá đơn hàng</button>
+    <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+  </div>
+  <hr width="100%" align="center" size="10px" />
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" [style.margin-top.px]='30'>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th width="300px">HÌNH ẢNH</th>
+            <th width="300px">TÊN</th>
+            <th>SỐ LƯỢNG</th>
+            <th>NGƯỜI MUA</th>
+            <th>NHÀ VẬN CHUYỂN</th>
+            <th>GIÁ</th>
+            <th>TỔNG GIÁ</th>
+            <th width="100px">ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let buy of buys | paginate: {id: 'book', itemsPerPage: 5, currentPage: page }">
+            <td class="img-show-book"><img [src]="buy.img | formatImg" width="130px" height="150px" style="margin-right: -70px"></td>
+            <td>{{buy.book}}</td>
+            <td>{{buy.amount}}</td>
+            <td>{{buy.user}}</td>
+            <td>{{buy.shipper}}</td>
+            <td>{{buy.price | currency : '':'':'1.0-3'}}</td>
+            <td>{{buy.allprice | currency : '':'':'1.0-3'}}</td>
+            <td>
+              <a href="admin/buy" (click)='removeBuy(buy.id)'>Xóa</a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="12">
+              <!-- phân trang -->
+              <pagination-controls id="book" class="pagination" (pageChange)="handlePageChange($event)" previousLabel="" nextLabel="">
+              </pagination-controls>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -30,6 +30,7 @@ import { FormatImgPipe } from './pipes/format-img.pipe';
 import { EditComponent } from './components/edit/edit.component';
 import { AddComponent } from './components/add/add.component';
 import { AuthorComponent } from './components/author/author.component';
+import { BuyComponent } from './components/buy/buy.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AuthorComponent } from './components/author/author.component';
     FormatImgPipe,
     EditComponent,
     AddComponent,
-    AuthorComponent
+    AuthorComponent,
+    BuyComponent
   ],
   imports: [
     BrowserModule,

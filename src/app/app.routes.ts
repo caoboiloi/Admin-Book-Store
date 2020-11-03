@@ -12,6 +12,7 @@ import { ShipperComponent } from './components/shipper/shipper.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddComponent } from './components/add/add.component';
 import { AuthorComponent } from './components/author/author.component';
+import { BuyComponent } from './components/buy/buy.component';
 
 import { AuthGaurdService } from './services/auth-gaurd.service';
 
@@ -33,6 +34,11 @@ export const appRouter: Routes = [
 			{
 				path: 'add',
 				component: AddComponent,
+				canActivate: [AuthGaurdService]
+			},
+			{
+				path: 'buy',
+				component:BuyComponent,
 				canActivate: [AuthGaurdService]
 			},
 			{
