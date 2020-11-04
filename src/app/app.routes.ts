@@ -15,6 +15,7 @@ import { AuthorComponent } from './components/author/author.component';
 import { BuyComponent } from './components/buy/buy.component';
 
 import { AuthGaurdService } from './services/auth-gaurd.service';
+import { AuthRoleService } from './services/auth-role.service';
 
 export const appRouter: Routes = [
 	{
